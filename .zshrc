@@ -40,8 +40,9 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 alias ls='ls --color'
-alias neofetch=fastfetch
+alias neofetch='fastfetch --logo linux'
 alias vim=nvim
+alias sd="cd ~ && cd \$(find * -type d | fzf)"
 
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/development/go
