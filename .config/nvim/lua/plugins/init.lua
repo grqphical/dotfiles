@@ -33,7 +33,7 @@ return {
     { 'nvim-tree/nvim-web-devicons' },
     { 'neovim/nvim-lspconfig' },
     {
-        'sudormrfbin/cheatsheet.nvim',
+        'doctorfree/cheatsheet.nvim',
         dependencies = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim' }
     },
     { 'williamboman/mason.nvim' },
@@ -54,4 +54,14 @@ return {
     {
         "tpope/vim-fugitive"
     },
+    {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        dependencies = { "nvim-lua/plenary.nvim" },
+    },
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' }
+    }
+
 }
