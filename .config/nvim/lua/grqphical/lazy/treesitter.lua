@@ -1,5 +1,6 @@
 return {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {'nvim-tree/nvim-web-devicons'},
     build = ":TSUpdate",
     config = function () 
       local configs = require("nvim-treesitter.configs")
