@@ -17,19 +17,6 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
 require("lazy").setup({
-  spec = {
-    {
-       "Mofiqul/adwaita.nvim",
-        lazy = false,
-        priority = 1000,
-    },
-    {
-      'nvim-telescope/telescope.nvim', tag = '0.1.8',
-      dependencies = { 'nvim-lua/plenary.nvim' }
-    }
-
-  },
-
-  install = { colorscheme = { "habamax" } },
-  checker = { enabled = true },
+  spec = "grqphical.lazy",
+  change_detection = { notify = false }
 })
