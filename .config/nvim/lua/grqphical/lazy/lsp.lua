@@ -105,7 +105,7 @@ return {
                         header = "",
                         prefix = "",
                     },
-                })            
+                })         
             end
     },
 
