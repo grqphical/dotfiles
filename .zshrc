@@ -43,11 +43,12 @@ alias ls='ls --color'
 alias neofetch='fastfetch --logo linux'
 alias vim=nvim
 alias sd="cd ~ && cd \$(find * -type d | fzf)"
+alias devenv="create-dev-env.sh"
 
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/development/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-
+export PATH=~/scripts:$PATH
 export PATH=/usr/local/nvim/bin:$PATH
 
 export NVM_DIR="$HOME/.nvm"
