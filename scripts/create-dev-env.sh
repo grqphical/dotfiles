@@ -8,63 +8,63 @@
 function template_go() {
     tmux new-session -d -s $1 -n "editor"
 
-    tmux send-keys -t "$1:0" "cd \"$2\"" C-m
-    tmux send-keys -t "$1:0" "nvim ." C-m
+    tmux send-keys -t "$1:1" "cd \"$2\"" C-m
+    tmux send-keys -t "$1:1" "nvim ." C-m
 
     tmux new-window -t "$1" -n "shell"
-    tmux send-keys -t "$1:1" "cd \"$2\"" C-m
-    tmux send-keys -t "$1:1" "go mod init \"$2\"" C-m
-    tmux send-keys -t "$1:1" "clear" C-m
+    tmux send-keys -t "$1:2" "cd \"$2\"" C-m
+    tmux send-keys -t "$1:2" "go mod init \"$2\"" C-m
+    tmux send-keys -t "$1:2" "clear" C-m
 
-    tmux select-window -t "$1:0"
+    tmux select-window -t "$1:1"
 }
 
 function template_rust() {
     tmux new-session -d -s $1 -n "editor"
 
-    tmux send-keys -t "$1:0" "cd \"$2\"" C-m
-    tmux send-keys -t "$1:0" "cargo init --name $1" C-m
-    tmux send-keys -t "$1:0" "nvim ." C-m
+    tmux send-keys -t "$1:1" "cd \"$2\"" C-m
+    tmux send-keys -t "$1:1" "cargo init --name $1" C-m
+    tmux send-keys -t "$1:1" "nvim ." C-m
 
     tmux new-window -t "$1" -n "shell"
-    tmux send-keys -t "$1:1" "cd \"$2\"" C-m
-    tmux send-keys -t "$1:1" "clear" C-m
+    tmux send-keys -t "$1:2" "cd \"$2\"" C-m
+    tmux send-keys -t "$1:2" "clear" C-m
 
-    tmux select-window -t "$1:0"
+    tmux select-window -t "$1:1"
 }
 
 function template_python() {
     tmux new-session -d -s $1 -n "editor"
 
-    tmux send-keys -t "$1:0" "cd \"$2\"" C-m
-    tmux send-keys -t "$1:0" "nvim ." C-m
+    tmux send-keys -t "$1:1" "cd \"$2\"" C-m
+    tmux send-keys -t "$1:1" "nvim ." C-m
 
     tmux new-window -t "$1" -n "shell"
-    tmux send-keys -t "$1:1" "cd \"$2\"" C-m
-    tmux send-keys -t "$1:1" "python3 -m venv venv" C-m
-    tmux send-keys -t "$1:1" ". venv/bin/activate" C-m
-    tmux send-keys -t "$1:1" "clear" C-m
+    tmux send-keys -t "$1:2" "cd \"$2\"" C-m
+    tmux send-keys -t "$1:2" "python3 -m venv venv" C-m
+    tmux send-keys -t "$1:2" ". venv/bin/activate" C-m
+    tmux send-keys -t "$1:2" "clear" C-m
 
-    tmux select-window -t "$1:0"
+    tmux select-window -t "$1:1"
 }
 
 function template_js() {
     tmux new-session -d -s $1 -n "editor"
     
-    tmux send-keys -t "$1:0" "cd \"$2\"" C-m
-    tmux send-keys -t "$1:0" "npm create vite@latest ." C-m
-    tmux send-keys -t "$1:0" "nvim ." C-m
+    tmux send-keys -t "$1:1" "cd \"$2\"" C-m
+    tmux send-keys -t "$1:1" "npm create vite@latest ." C-m
+    tmux send-keys -t "$1:1" "nvim ." C-m
 
     tmux new-window -t "$1" -n "shell"
-    tmux send-keys -t "$1:1" "cd \"$2\"" C-m
-    tmux send-keys -t "$1:1" "clear" C-m
+    tmux send-keys -t "$1:2" "cd \"$2\"" C-m
+    tmux send-keys -t "$1:2" "clear" C-m
 
     tmux new-window -t "$1" -n "server"
-    tmux send-keys -t "$1:2" "cd \"$2\"" C-m
-    tmux send-keys -t "$1:2" "npm install" C-m
-    tmux send-keys -t "$1:2" "npm run dev" C-m
+    tmux send-keys -t "$1:3" "cd \"$2\"" C-m
+    tmux send-keys -t "$1:3" "npm install" C-m
+    tmux send-keys -t "$1:3" "npm run dev" C-m
 
-    tmux select-window -t "$1:0"
+    tmux select-window -t "$1:1"
 }
 
 cd ~
