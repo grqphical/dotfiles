@@ -62,4 +62,10 @@ fi
 eval "$(oh-my-posh init zsh --config ~/posh-themes/grqphical.toml)"
 eval "$(fzf --zsh)"
 
-
+# print my custom header
+echo "                 _   _         _ "
+echo " ___ ___ ___ ___| |_|_|___ ___| |"
+echo "| . |  _| . | . |   | |  _| .'| |"
+echo "|_  |_| |_  |  _|_|_|_|___|__,|_|"
+echo "|___|     |_|_|  "
+echo
