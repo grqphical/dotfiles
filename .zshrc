@@ -50,6 +50,7 @@ export GOPATH=$HOME/development/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export PATH=~/scripts:$PATH
 export PATH=/usr/local/nvim/bin:$PATH
+export PATH=~/language-servers:$PATH
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

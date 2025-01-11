@@ -17,6 +17,10 @@ vim.keymap.set("n", "<leader>f", function()
     vim.lsp.buf.format { async = true }
 end)
 
+vim.keymap.set('n', 'grn', vim.lsp.buf.rename)
+vim.keymap.set('n', 'gra', vim.lsp.buf.code_action)
+vim.keymap.set('n', 'grr', vim.lsp.buf.references)
+
 -- Golang Specific: Insert if err != nil
 vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>")
 
