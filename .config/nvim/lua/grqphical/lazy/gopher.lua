@@ -7,7 +7,5 @@ return {
 	config = function()
 		local gopher = require("gopher")
 		gopher.setup({})
-
-		vim.keymap.set("n", "<>")
 	end,
 }
