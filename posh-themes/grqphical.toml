@@ -1,77 +1,79 @@
-#:schema https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
-
-version = 2
-final_space = true
 console_title_template = '{{ .Shell }} in {{ .Folder }}'
-
-[[blocks]]
-  type = 'prompt'
-  alignment = 'left'
-  newline = true
-
-  [[blocks.segments]]
-    type = "python"
-    style = "powerline"
-    powerline_symbol = ""
-    foreground = "yellow"
-    background = "transparent"
-    template = "{{ if .Venv }} {{ .Venv }} {{ end }}"
-
-  [[blocks.segments]]
-    type = 'path'
-    style = 'plain'
-    background = 'transparent'
-    foreground = 'blue'
-    template = '{{ .Path }}'
-
-    [blocks.segments.properties]
-        style = 'full'
-  
-  [[blocks.segments]]
-    type = "git"
-    style = 'plain'
-    foreground = '#6c6c6c'
-    background = 'transparent'
-    template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed)}}*{{ end }}'
-
-    [blocks.segments.properties]
-        fetch_status = true
-
-[[blocks]]
-    type = 'rprompt'
-    overflow = 'hidden'
-
-    [[blocks.segments]]
-        type = 'executiontime'
-        style = 'plain'
-        foreground = 'yellow'
-        background = 'transparent'
-        template = '{{ .FormattedMs }}'
-
-        [blocks.segments.properties]
-            threshold = 5000
-            style = 'austin'
-[[blocks]]
-  type = 'prompt'
-  alignment = 'left'
-  newline = true
-  
-  [[blocks.segments]]
-    type = 'text'
-    style = 'plain'
-    foreground_templates = [
-        "{{if gt .Code 0}}red{{end}}",
-        "{{if eq .Code 0}}magenta{end}}",
-    ]
-    foreground = 'magenta'
-    background = 'transparent'
-    template = "❯"
+version = 3
+final_space = true
 
 [transient_prompt]
-    foreground = "magenta"
-    foreground_templates = [
-        "{{if gt .Code 0}}red{{end}}",
-        "{{if eq .Code 0}}magenta{end}}",
-    ]
-    background = "transparent"
-    template = "❯ "
+  template = '❯ '
+  foreground = 'magenta'
+  background = 'transparent'
+  foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}magenta{end}}']
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    template = '{{ if .Venv }} {{ .Venv }} {{ end }}'
+    foreground = 'yellow'
+    powerline_symbol = ''
+    background = 'transparent'
+    type = 'python'
+    style = 'powerline'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
+
+  [[blocks.segments]]
+    template = '{{ .Path }}'
+    foreground = 'blue'
+    background = 'transparent'
+    type = 'path'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
+      style = 'full'
+
+  [[blocks.segments]]
+    template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed)}}*{{ end }}'
+    foreground = '#6c6c6c'
+    background = 'transparent'
+    type = 'git'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
+      fetch_status = true
+
+[[blocks]]
+  type = 'rprompt'
+  overflow = 'hidden'
+
+  [[blocks.segments]]
+    template = '{{ .FormattedMs }}'
+    foreground = 'yellow'
+    background = 'transparent'
+    type = 'executiontime'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
+      style = 'austin'
+      threshold = 5000
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    template = '❯'
+    foreground = 'magenta'
+    background = 'transparent'
+    type = 'text'
+    style = 'plain'
+    foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}magenta{end}}']
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
