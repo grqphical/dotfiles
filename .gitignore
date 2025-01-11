@@ -1,3 +1,4 @@
 .config/gh
 .config/go
 test_lsp.lua
+log.txt
