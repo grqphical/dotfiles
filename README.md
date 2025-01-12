@@ -19,7 +19,3 @@ git clone https://github.com/grqphical/dotfiles ~/dotfiles
 cd dotfiles
 stow .
 ```
-
-## License
-
-The dotfiles are public domain whilst 
