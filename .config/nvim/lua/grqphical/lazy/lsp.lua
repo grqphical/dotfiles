@@ -40,6 +40,9 @@ return {
             lspconfig.pyright.setup { capabilities = capabilities }
             lspconfig.gopls.setup { capabilities = capabilities }
             lspconfig.emmet_language_server.setup { capabilities = capabilities }
+            lspconfig.html.setup { capabilities = capabilities }
+            lspconfig.cssls.setup { capabilities = capabilities }
+            lspconfig.jsonls.setup { capabilities = capabilities }
 
             vim.api.nvim_create_autocmd('LspAttach', {
                 callback = function(args)
