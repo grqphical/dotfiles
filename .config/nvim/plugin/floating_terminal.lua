@@ -46,6 +46,8 @@ local toggle_terminal = function()
         if vim.bo[state.floating.buf].buftype ~= "terminal" then
             vim.cmd.terminal()
         end
+
+        vim.api.nvim_command("startinsert")
     else
         vim.api.nvim_win_hide(state.floating.win)
     end
