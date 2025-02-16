@@ -46,19 +46,13 @@ alias sd="cd ~ && cd \$(find * -type d | fzf)"
 alias devenv="create-dev-env.sh"
 
 export GOROOT=/usr/local/go
-export GOPATH=$HOME/development/go
+export GOPATH=$HOME/dev/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export PATH=~/scripts:$PATH
-export PATH=/usr/local/nvim/bin:$PATH
 export PATH=~/language-servers:$PATH
+export PATH=$PATH:/home/grqphical/.local/bin
+export PATH=~/.local/bin/nvim/bin:$PATH
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-if [[ ! "$PATH" == */home/grqphical/.fzf/bin* ]]; then
-  PATH="${PATH:+${PATH}:}/home/grqphical/.fzf/bin"
-fi
 
 eval "$(oh-my-posh init zsh --config ~/posh-themes/grqphical.toml)"
 eval "$(fzf --zsh)"
@@ -70,3 +64,10 @@ echo "| . |  _| . | . |   | |  _| .'| |"
 echo "|_  |_| |_  |  _|_|_|_|___|__,|_|"
 echo "|___|     |_|_|  "
 echo
+
+# fnm
+FNM_PATH="/home/grqphical/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="/home/grqphical/.local/share/fnm:$PATH"
+  eval "`fnm env`"
+fi
