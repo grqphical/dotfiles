@@ -36,6 +36,10 @@ return {
 
             local lspconfig = require("lspconfig")
 
+            vim.diagnostic.config({
+                virtual_lines = true
+            })
+
             lspconfig.lua_ls.setup { capabilities = capabilities }
             lspconfig.pyright.setup { capabilities = capabilities }
             lspconfig.gopls.setup { capabilities = capabilities }
