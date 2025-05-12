@@ -51,7 +51,8 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export PATH=~/scripts:$PATH
 export PATH=~/language-servers:$PATH
 export PATH=$PATH:/home/grqphical/.local/bin
-export PATH=~/.local/bin/nvim/bin:$PATH
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+export EDITOR="/opt/nvim-linux-x86_64/bin"
 
 
 eval "$(oh-my-posh init zsh --config ~/posh-themes/grqphical.toml)"
