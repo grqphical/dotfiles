@@ -1,0 +1,92 @@
+[user]
+    name = Nathan Jacobson
+    email = "95062977+grqphical@users.noreply.github.com"
+    signingkey = 44F645FFBE9DDF9D
+
+[init]
+    defaultBranch = "main"
+
+[commit]
+    gpgSign = true
+
+[status]
+    branch = true
+    showStash = true
+    showUntrackedFiles = all
+
+[diff]
+    context = 3
+    renames = copies
+    interHunkContext = 10
+
+[push]
+    autoSetupRemote = true
+    default = current
+    followTags = true
+
+[pull]
+    default = current
+    rebase = true
+
+[log]
+    abbrevCommit = true
+    graphColors = blue,yellow,cyan,magenta,green,red
+
+[rebase]
+    autoStash = true
+    missingCommitsCheck = warn
+
+[branch]
+    sort = -committerdate
+
+[tag]
+    sort = -taggerdate
+
+[pager]
+    branch = false
+    tag = false
+    diff = diff-so-fancy | $PAGER
+
+[core]
+    compression = 9
+    whitespace = error
+    preloadIndex = true
+    editor = "nvim"
+
+[advice]
+    addEmptyPathSpec = false
+    pushNonFastForward = false
+    statusHints = false
+
+[color "diff"]
+    meta = black bold
+    frag = magenta
+    context = white
+    whitespace = yellow reverse
+    old = red
+
+[color "decorate"]
+    HEAD = red
+    branch = blue
+    tag = yellow
+    remoteBranch = magenta
+
+[color "branch"]
+    current = magenta
+    local = default
+    remote = yellow
+    upstream = green
+    plain = blue
+
+[interactive]
+    diffFilter = diff-so-fancy --patch
+    singlekey = true
+
+[diff-so-fancy]
+    markEmptyLines = false
+
+[url "git@github.con:grqphical/"]
+    insteadOf = "gq:"
+
+[url "git@github.com:"]
+    insteadOf = "gh:"
