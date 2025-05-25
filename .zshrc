@@ -47,15 +47,16 @@ alias devenv="create-dev-env.sh"
 
 # Git aliases
 alias gs='git status --short'
-alias gd='git diff'
+alias gd="git diff --output-indicator-new=' ' --output-indicator-old=' '"
 alias ga='git add'
+alias gap='git add --patch'
 alias gc='git commit'
 alias gp='git push'
 alias gu='git pull'
-alias gl='git log'
+alias gl="git log --all --graph --pretty=format:'%C(magenta)%h %C(white) %an %ar%C(auto) %D%n%s%n'"
 alias gb='git branch'
 alias gi='git init'
-alias gc='git clone'
+alias gcl='git clone'
 
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/dev/go
@@ -65,6 +66,7 @@ export PATH=~/language-servers:$PATH
 export PATH=$PATH:/home/grqphical/.local/bin
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 export EDITOR="/opt/nvim-linux-x86_64/bin"
+export GPG_TTY=$(tty)
 
 
 eval "$(oh-my-posh init zsh --config ~/posh-themes/grqphical.toml)"
