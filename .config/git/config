@@ -1,7 +1,7 @@
 [user]
     name = Nathan Jacobson
-    email = "95062977+grqphical@users.noreply.github.com"
-    signingkey = 44F645FFBE9DDF9D
+    email = "njacobson604@gmail.com"
+    signingkey = 86A1488F4259FF73
 
 [init]
     defaultBranch = "main"
