@@ -58,6 +58,11 @@ alias gb='git branch'
 alias gi='git init'
 alias gcl='git clone'
 
+# Tmux aliases
+alias tn="tmux new-session -s"
+alias tl="tmux list-sessions"
+alias ta="tmux attach-session"
+
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/dev/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
