@@ -1,6 +1,6 @@
 # grqphical's dotfiles
 
-These are my personal dotfiles for ZSH, TMUX, Oh-My-Posh and Neovim running on Debian with WSL 2
+These are my personal dotfiles for ZSH, Oh-My-Posh and Neovim running on Debian with WSL 2
 
 
 ## Install
