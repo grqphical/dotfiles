@@ -45,6 +45,18 @@ alias vim=nvim
 alias sd="cd ~ && cd \$(find * -type d | fzf)"
 alias devenv="create-dev-env.sh"
 
+# Git aliases
+alias gs='git status --short'
+alias gd='git diff'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gu='git pull'
+alias gl='git log'
+alias gb='git branch'
+alias gi='git init'
+alias gc='git clone'
+
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/dev/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
