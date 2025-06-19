@@ -25,9 +25,16 @@ return {
             },
 
             signature = { enabled = true },
-
-        },
-        opts_extend = { "sources.default" }
+            snippets = { preset = "luasnip" },
+            sources = {
+                default = {
+                    "lsp",
+                    "path",
+                    "snippets",
+                    "buffer",
+                },
+            },
+        }
     },
     {
         "neovim/nvim-lspconfig",
@@ -47,21 +54,27 @@ return {
             lspconfig.html.setup { capabilities = capabilities }
             lspconfig.cssls.setup { capabilities = capabilities }
             lspconfig.jsonls.setup { capabilities = capabilities }
-            lspconfig.ts_ls.setup { capabilities = capabilities, init_options = {
-                plugins = {
-                    {
-                        name = "@vue/typescript-plugin",
-                        location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
-                        languages = { "javascript", "typescript", "vue" },
+            lspconfig.ts_ls.setup {
+                capabilities = capabilities,
+                init_options = {
+                    plugins = {
+                        {
+                            name = "@vue/typescript-plugin",
+                            location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+                            languages = { "javascript", "typescript", "vue" },
+                        },
                     },
                 },
-            },
                 filetypes = {
                     "javascript",
                     "typescript",
                     "vue",
-                }, }
-            lspconfig.emmet_language_server.setup { capabilities = capabilities, filetypes = { "html", "templ" } }
+                },
+            }
+            lspconfig.emmet_language_server.setup {
+                capabilities = capabilities,
+                filetypes = { "html", "templ" }
+            }
 
             vim.api.nvim_create_autocmd('LspAttach', {
                 callback = function(args)
