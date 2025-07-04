@@ -9,19 +9,19 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 -- Remap CTRL+C to esc
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
--- Apply code action
-vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action({ apply = true }) end)
 
 -- Format file
 vim.keymap.set("n", "<leader>f", function()
     vim.lsp.buf.format { async = true }
 end)
 
+--lsp keybindings
 vim.keymap.set('n', 'grn', vim.lsp.buf.rename)
-vim.keymap.set('n', 'gra', vim.lsp.buf.code_action)
+vim.keymap.set('n', 'ca', vim.lsp.buf.code_action)
 vim.keymap.set('n', 'grr', vim.lsp.buf.references)
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+vim.keymap.set('n', '<leader>dc', vim.lsp.buf.signature_help)
+
 
 -- Golang Specific: Insert if err != nil
 vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>")
-
-
