@@ -40,6 +40,8 @@ return {
                 virtual_lines = true
             })
 
+
+
             lspconfig.lua_ls.setup { capabilities = capabilities }
             lspconfig.pyright.setup { capabilities = capabilities }
             lspconfig.gopls.setup { capabilities = capabilities }
@@ -62,6 +64,7 @@ return {
                     "vue",
                 }, }
             lspconfig.emmet_language_server.setup { capabilities = capabilities, filetypes = { "html", "templ" } }
+
 
             vim.api.nvim_create_autocmd('LspAttach', {
                 callback = function(args)
