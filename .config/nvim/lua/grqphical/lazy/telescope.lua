@@ -19,7 +19,7 @@ return {
 
             vim.keymap.set('n', '<leader>fd', telescope.find_files)
             vim.keymap.set('n', '<leader>fh', telescope.help_tags)
-            vim.keymap.set('n', '<leader>gs', telescope.git_status)
+            vim.keymap.set('n', '<leader>km', telescope.keymaps)
             vim.keymap.set('n', '<leader>en', function()
                 telescope.find_files {
                     cwd = vim.fn.stdpath('config')
