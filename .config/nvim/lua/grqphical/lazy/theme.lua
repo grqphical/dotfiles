@@ -1,17 +1,13 @@
 return {
-	"catppuccin/nvim",
-	lazy = false,
-	name = "catppuccin",
-	priority = 1000,
+    "rose-pine/neovim",
+    name = "rose-pine",
+    config = function()
+        vim.cmd("colorscheme rose-pine")
 
-	-- configure and set on startup
-	config = function()
-		require("catppuccin").setup({
-			flavour = "mocha",
-		})
-
-		vim.cmd("colorscheme catppuccin")
-
-		vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	end,
+        vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+        vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+        vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+        vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
+        vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
+    end
 }

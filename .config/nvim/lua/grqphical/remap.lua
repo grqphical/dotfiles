@@ -22,6 +22,8 @@ vim.keymap.set('n', 'grr', vim.lsp.buf.references)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
 vim.keymap.set('n', '<leader>dc', vim.lsp.buf.signature_help)
 
+vim.keymap.set('n', '<leader>sc', ':so %<CR>')
+
 
 -- Golang Specific: Insert if err != nil
 vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>")
