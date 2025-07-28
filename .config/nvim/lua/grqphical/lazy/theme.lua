@@ -9,6 +9,5 @@ return {
         vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
         vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
         vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
-        vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
     end
 }
