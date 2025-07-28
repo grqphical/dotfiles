@@ -40,7 +40,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 alias ls='ls --color'
-alias neofetch='fastfetch --logo linux'
+alias neofetch='fastfetch'
 alias vim=nvim
 alias sd="cd ~ && cd \$(find * -type d | fzf)"
 alias devenv="create-dev-env.sh"
