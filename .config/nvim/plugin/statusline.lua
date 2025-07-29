@@ -16,15 +16,6 @@ function ModeStatus()
     return string.format("%s %s ", m.hl, m.label)
 end
 
-function GetCurrentGitBranch()
-    local branch = vim.fn.system("git branch --show-current"):gsub("%s+", "")
-    if vim.v.shell_error ~= 0 then
-        return ""
-    end
-
-    return string.format("[%s]", branch)
-end
-
 local statusline = {
     '%{%v:lua.ModeStatus()%}%* ',
     '%t',
@@ -32,7 +23,7 @@ local statusline = {
     '%m',
     '%=',
     '%y',
-    ' %{%v:lua.GetCurrentGitBranch()%}',
+    ' %{FugitiveStatusline()}',
     ' %2p%%',
     ' %3l:%-2c '
 }
