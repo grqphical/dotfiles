@@ -23,7 +23,6 @@ local statusline = {
     '%m',
     '%=',
     '%y',
-    ' %{FugitiveStatusline()}',
     ' %2p%%',
     ' %3l:%-2c '
 }

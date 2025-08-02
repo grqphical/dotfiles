@@ -74,6 +74,7 @@ export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.local/bin/nvim-linux-x86_64/bin
 export EDITOR="~/.local/bin/nvim-linux-x86_64/bin"
 export GPG_TTY=$(tty)
+export XDG_DATA_HOME=~/.local/share
 
 
 eval "$(oh-my-posh init zsh --config ~/posh-themes/grqphical.toml)"
