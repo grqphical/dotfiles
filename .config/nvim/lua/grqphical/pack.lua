@@ -111,5 +111,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 vim.cmd("set completeopt+=noselect")
 
-vim.lsp.enable({ "lua_ls", "pyright", "gopls", "templ", "html", "cssls", "jsonls", "ts_ls", "emmet_language_server" })
+vim.lsp.enable({ "lua_ls", "pyright", "gopls", "emmet_language_server", "css_ls", "ts_ls", "templ", "html" })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
