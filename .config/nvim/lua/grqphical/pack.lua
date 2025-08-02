@@ -6,7 +6,6 @@ vim.pack.add({
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
     { src = "https://github.com/nvim-telescope/telescope.nvim" },
     { src = "https://github.com/mbbill/undotree" },
-    { src = "https://github.com/folke/lazydev.nvim" },
     { src = "https://github.com/neovim/nvim-lspconfig" },
 
 })
@@ -69,23 +68,34 @@ end)
 vim.keymap.set('n', "<leader>u", vim.cmd.UndotreeToggle)
 
 -- LSP Setup
--- lazydev.nvim
-require("lazydev").setup {
-    library = {
-        -- See the configuration section for more details
-        -- Load luvit types when the `vim.uv` word is found
-        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-    },
-}
-
--- lspconfig
-local lspconfig = require("lspconfig")
-
 vim.diagnostic.config({
     virtual_lines = true
 })
 
-lspconfig.ts_ls.setup { init_options = {
+vim.lsp.config("lua_ls", {
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = "LuaJIT",
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { "vim" },
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+                enable = false,
+            },
+        },
+    }
+})
+
+vim.lsp.config("ts_ls", { init_options = {
     plugins = {
         {
             name = "@vue/typescript-plugin",
@@ -98,8 +108,8 @@ lspconfig.ts_ls.setup { init_options = {
         "javascript",
         "typescript",
         "vue",
-    }, }
-lspconfig.emmet_language_server.setup { filetypes = { "html", "templ" } }
+    }, })
+vim.lsp.config("emmet_language_server", { filetypes = { "html", "templ" } })
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(ev)
@@ -111,5 +121,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 vim.cmd("set completeopt+=noselect")
 
-vim.lsp.enable({ "lua_ls", "pyright", "gopls", "emmet_language_server", "css_ls", "ts_ls", "templ", "html" })
+vim.lsp.enable({ "lua_ls", "pyright", "gopls", "emmet_language_server", "cssls", "ts_ls", "templ", "html" })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
