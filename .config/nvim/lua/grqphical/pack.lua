@@ -7,8 +7,6 @@ vim.pack.add({
     { src = "https://github.com/nvim-telescope/telescope.nvim" },
     { src = "https://github.com/mbbill/undotree" },
     { src = "https://github.com/folke/lazydev.nvim" },
-    { src = "https://github.com/rafamadriz/friendly-snippets" },
-    { src = "https://github.com/Saghen/blink.cmp" },
     { src = "https://github.com/neovim/nvim-lspconfig" },
 
 })
@@ -79,38 +77,15 @@ require("lazydev").setup {
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
     },
 }
--- blink.cmp
-require("blink.cmp").setup {
-    keymap = { preset = 'default' },
-
-    appearance = {
-        use_nvim_cmp_as_default = true,
-        nerd_font_variant = 'mono'
-    },
-
-    signature = { enabled = true },
-
-}
 
 -- lspconfig
-local capabilities = require('blink.cmp').get_lsp_capabilities()
-
 local lspconfig = require("lspconfig")
 
 vim.diagnostic.config({
     virtual_lines = true
 })
 
-
-
-lspconfig.lua_ls.setup { capabilities = capabilities }
-lspconfig.pyright.setup { capabilities = capabilities }
-lspconfig.gopls.setup { capabilities = capabilities }
-lspconfig.templ.setup { capabilities = capabilities }
-lspconfig.html.setup { capabilities = capabilities }
-lspconfig.cssls.setup { capabilities = capabilities }
-lspconfig.jsonls.setup { capabilities = capabilities }
-lspconfig.ts_ls.setup { capabilities = capabilities, init_options = {
+lspconfig.ts_ls.setup { init_options = {
     plugins = {
         {
             name = "@vue/typescript-plugin",
@@ -124,6 +99,17 @@ lspconfig.ts_ls.setup { capabilities = capabilities, init_options = {
         "typescript",
         "vue",
     }, }
-lspconfig.emmet_language_server.setup { capabilities = capabilities, filetypes = { "html", "templ" } }
+lspconfig.emmet_language_server.setup { filetypes = { "html", "templ" } }
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if client:supports_method('textDocument/completion') then
+            vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+        end
+    end,
+})
+vim.cmd("set completeopt+=noselect")
 
 vim.lsp.enable({ "lua_ls", "pyright", "gopls", "templ", "html", "cssls", "jsonls", "ts_ls", "emmet_language_server" })
+vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
