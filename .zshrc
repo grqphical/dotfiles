@@ -70,9 +70,9 @@ export GOPATH=$HOME/dev/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export PATH=~/scripts:$PATH
 export PATH=~/language-servers:$PATH
-export PATH=$PATH:/home/grqphical/.local/bin
-export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-export EDITOR="/opt/nvim-linux-x86_64/bin"
+export PATH=$PATH:~/.local/bin
+export PATH=$PATH:~/.local/bin/nvim-linux-x86_64/bin
+export EDITOR="~/.local/bin/nvim-linux-x86_64/bin"
 export GPG_TTY=$(tty)
 
 
