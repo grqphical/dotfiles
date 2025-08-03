@@ -28,6 +28,7 @@ vim.opt.termguicolors  = true
 vim.opt.scrolloff      = 8
 vim.opt.signcolumn     = "yes"
 vim.opt.isfname:append("@-@")
+vim.o.splitright = true
 
 vim.opt.updatetime = 50
 
@@ -128,7 +129,9 @@ configs.setup({
 })
 
 -- fugitive (Git)
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+vim.keymap.set("n", "<leader>gs", function ()
+    vim.cmd("vertical G")
+end)
 
 -- telescope
 require("telescope").setup {
