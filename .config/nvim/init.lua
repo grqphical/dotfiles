@@ -9,7 +9,7 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.o.winborder = "rounded"
+vim.opt.winborder  = "rounded"
 
 vim.opt.smartindent = true
 
@@ -80,7 +80,7 @@ vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>")
 
 -- ================================================================================
 -- Plugins
--- ================================================================================ 
+-- ================================================================================
 vim.pack.add({
     { src = "https://github.com/rose-pine/neovim" },
     { src = "https://github.com/tpope/vim-fugitive" },
@@ -90,6 +90,8 @@ vim.pack.add({
     { src = "https://github.com/nvim-telescope/telescope.nvim" },
     { src = "https://github.com/mbbill/undotree" },
     { src = "https://github.com/neovim/nvim-lspconfig" },
+    { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.*") },
+    { src = "https://github.com/rafamadriz/friendly-snippets" }
 
 })
 
@@ -101,6 +103,7 @@ vim.api.nvim_set_hl(0, "TelescopeNormal", {})
 vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
+vim.api.nvim_set_hl(0, "BlinkCMPDocBorder", {})
 
 -- treesitter
 local configs = require("nvim-treesitter.configs")
@@ -150,10 +153,55 @@ end)
 -- undotree
 vim.keymap.set('n', "<leader>u", vim.cmd.UndotreeToggle)
 
+-- ================================================================================
 -- LSP Setup
+-- ================================================================================
+
 vim.diagnostic.config({
     virtual_lines = true
 })
+
+local blink = require("blink.cmp")
+
+blink.setup {
+    -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+    -- 'super-tab' for mappings similar to vscode (tab to accept)
+    -- 'enter' for enter to accept
+    -- 'none' for no mappings
+    --
+    -- All presets have the following mappings:
+    -- C-space: Open menu or open docs if already open
+    -- C-n/C-p or Up/Down: Select next/previous item
+    -- C-e: Hide menu
+    -- C-k: Toggle signature help (if signature.enabled = true)
+    --
+    -- See :h blink-cmp-config-keymap for defining your own keymap
+    keymap = { preset = 'default' },
+
+    appearance = {
+        -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+        -- Adjusts spacing to ensure icons are aligned
+        nerd_font_variant = 'mono'
+    },
+
+    -- (Default) Only show the documentation popup when manually triggered
+    completion = { documentation = { auto_show = false } },
+
+    -- Default list of enabled providers defined so that you can extend it
+    -- elsewhere in your config, without redefining it, due to `opts_extend`
+    sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+    },
+
+    -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+    -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+    -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+    --
+    -- See the fuzzy documentation for more information
+    fuzzy = { implementation = "prefer_rust_with_warning" }
+}
+
+local capabilities = blink.get_lsp_capabilities()
 
 vim.lsp.config("lua_ls", {
     settings = {
@@ -175,35 +223,34 @@ vim.lsp.config("lua_ls", {
                 enable = false,
             },
         },
-    }
+    },
+    capabilities = capabilities,
 })
 
-vim.lsp.config("ts_ls", { init_options = {
-    plugins = {
-        {
-            name = "@vue/typescript-plugin",
-            location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
-            languages = { "javascript", "typescript", "vue" },
+vim.lsp.config("ts_ls", {
+    init_options = {
+        plugins = {
+            {
+                name = "@vue/typescript-plugin",
+                location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+                languages = { "javascript", "typescript", "vue" },
+            },
         },
     },
-},
     filetypes = {
         "javascript",
         "typescript",
         "vue",
-    }, })
-vim.lsp.config("emmet_language_server", { filetypes = { "html", "templ" } })
-
-vim.api.nvim_create_autocmd('LspAttach', {
-    callback = function(ev)
-        local client = vim.lsp.get_client_by_id(ev.data.client_id)
-        if client:supports_method('textDocument/completion') then
-            vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-        end
-    end,
+    },
+    capabilities = capabilities
 })
-vim.cmd("set completeopt+=noselect")
+
+vim.lsp.config("emmet_language_server", { filetypes = { "html", "templ" }, capabilities = capabilities })
+vim.lsp.config("pyright", { capabilities = capabilities })
+vim.lsp.config("gopls", { capabilities = capabilities })
+vim.lsp.config("cssls", { capabilities = capabilities })
+vim.lsp.config("templ", { capabilities = capabilities })
+vim.lsp.config("html", { capabilities = capabilities })
 
 vim.lsp.enable({ "lua_ls", "pyright", "gopls", "emmet_language_server", "cssls", "ts_ls", "templ", "html" })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
-
