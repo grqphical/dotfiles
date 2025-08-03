@@ -1,3 +1,4 @@
+stty -echo
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 if [ ! -d "$ZINIT_HOME" ]; then
@@ -15,9 +16,9 @@ zinit light Aloxaf/fzf-tab
 autoload -U compinit && compinit
 
 # Keybindings
-bindkey '^f' autosuggest-accept
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+bindkey -s '^f' "tmux-sessionizer\n" 
 
 # History
 HISTSIZE=5000
@@ -94,3 +95,5 @@ if [ -d "$FNM_PATH" ]; then
   export PATH="/home/grqphical/.local/share/fnm:$PATH"
   eval "`fnm env`"
 fi
+
+stty echo
