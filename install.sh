@@ -49,7 +49,7 @@ nvm install 24
 
 echo "Installing Language Servers"
 npm install -g pyright
-npm install -g vscode-language-servers-extracted
+npm i -g vscode-langservers-extracted
 
 mkdir ~/language-servers/
 wget https://github.com/Myriad-Dreamin/tinymist/releases/download/latest/tinymist-linux-x64 -O ~/language-servers/tinymist
