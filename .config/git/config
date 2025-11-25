@@ -1,0 +1,74 @@
+[user]
+    name = "Nathan Jacobson"
+    email = "95062977+grqphical@users.noreply.github.com"
+    signingKey = 8B7323058A1CE7C1 
+
+[core]
+    compression = 9
+    whitespace = error
+    preloadindex = true
+    editor = "nvim"
+
+[commit]
+    gpgSign = true
+    template = ~/.config/git/template
+    verbose = true
+
+[init]
+    defaultBranch = "main"
+
+[status]
+    branch = true
+    showStash = true
+    showUntrackedFiles = all
+
+[diff]
+    context = 3
+    renames = copies
+    interHunkContext = 10
+
+[pager]
+    diff = diff-so-fancy | $PAGER
+
+[diff-so-fancy]
+    markEmptyLines = false
+
+[color "diff"]
+    meta = black bold
+    frag = magenta
+    context = white
+    whitespace = yellow reverse
+    old = red
+
+[interactive]
+    diffFilter = diff-so-fancy --patch
+    singlekey = true
+
+[push]
+    autoSetupRemote = true
+    default = current
+    followTags = true
+
+[pull]
+    default = current
+    rebase = true
+
+[rebase]
+    autoStash = true
+    missingCommitsCheck = warn
+
+[log]
+    abbrevCommit = true
+    graphColors  = blue,yellow,cyan,magenta,green,red
+
+[color "decorate"]
+    HEAD = red
+    branch = blue
+    tag = yellow
+    remoteBranch = magenta
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential

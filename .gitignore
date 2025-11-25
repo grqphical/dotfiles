@@ -1,0 +1,6 @@
+.config/gh
+.config/go
+test_lsp.lua
+test_*.lua
+log.txt
+.config/tmux/plugins
