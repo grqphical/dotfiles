@@ -267,7 +267,17 @@ vim.lsp.config("tinymist", {
 })
 
 vim.lsp.config("emmet_language_server", { filetypes = { "html", "templ" }, capabilities = capabilities })
-vim.lsp.config("pyright", { capabilities = capabilities })
+vim.lsp.config("pyright", {
+    capabilities = capabilities,
+    settings = {
+        python = {
+            analysis = {
+                typeCheckingMode = "off",
+            }
+        }
+    }
+}
+)
 vim.lsp.config("gopls", { capabilities = capabilities })
 vim.lsp.config("cssls", { capabilities = capabilities })
 vim.lsp.config("templ", { capabilities = capabilities })
