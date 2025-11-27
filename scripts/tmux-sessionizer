@@ -2,7 +2,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/dev ~/dotfiles/ -mindepth 2 -maxdepth 2 -type d | fzf)
+    selected=$(fdfind -E language-servers/ . ~ | fzf)
 fi
 if [[ -z $selected ]]; then
     exit 0
