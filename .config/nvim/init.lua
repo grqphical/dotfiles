@@ -283,7 +283,16 @@ vim.lsp.config("cssls", { capabilities = capabilities })
 vim.lsp.config("templ", { capabilities = capabilities })
 vim.lsp.config("html", { capabilities = capabilities })
 
-vim.lsp.enable({ "lua_ls", "pyright", "gopls", "emmet_language_server", "cssls", "ts_ls", "templ", "html", "tinymist" })
+vim.lsp.config("clangd", {
+    capabilities = capabilities,
+    cmd = { 'clangd', '--background-index', '--clang-tidy', '--log=verbose' },
+    init_options = {
+        fallbackFlags = { '-std=c++17' },
+    }
+})
+
+vim.lsp.enable({ "lua_ls", "pyright", "gopls", "emmet_language_server", "cssls", "ts_ls", "templ", "html", "tinymist",
+    "clangd" })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
 
 -- format on save
