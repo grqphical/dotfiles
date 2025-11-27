@@ -46,7 +46,7 @@ alias vim=nvim
 
 # Git aliases
 alias gs='git status --short'
-alias gd="git diff --output-indicator-new=' ' --output-indicator-old=' '"
+alias gd="git diff --color | diff-so-fancy"
 alias ga='git add'
 alias gap='git add --patch'
 alias gc='git commit'
