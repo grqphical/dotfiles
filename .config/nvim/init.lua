@@ -141,13 +141,10 @@ require("render-markdown").setup({
 })
 vim.fn["mkdp#util#install"]()
 vim.g.mkdp_filetypes = { "markdown" }
-vim.g.mkdp_browser = "brave"
 
 vim.keymap.set("n", "<leader>pm", vim.cmd.MarkdownPreview)
 
-require('typst-preview').setup({
-    open_cmd = "brave %s"
-})
+require('typst-preview').setup()
 
 -- fugitive (Git)
 vim.keymap.set("n", "<leader>gs", function()
@@ -260,13 +257,24 @@ vim.lsp.config("tinymist", {
         semanticTokens = "disable"
     },
     capabilities = capabilities,
-    filetpyes = {
-        "typst",
-    },
     cmd = { "tinymist" },
 })
 
-vim.lsp.config("emmet_language_server", { filetypes = { "html", "templ" }, capabilities = capabilities })
+vim.lsp.config("emmet_language_server", {
+    filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "pug", "typescriptreact", "templ" },
+    capabilities = capabilities,
+    init_options = {
+        includeLanguages = {},
+        excludeLanguages = {},
+        extensionsPath = {},
+        preferences = {},
+        showAbbreviationSuggestions = true,
+        showExpandedAbbreviation = "always",
+        showSuggestionsAsSnippets = false,
+        syntaxProfiles = {},
+        variables = {},
+    },
+})
 vim.lsp.config("pyright", {
     capabilities = capabilities,
     settings = {
@@ -281,18 +289,13 @@ vim.lsp.config("pyright", {
 vim.lsp.config("gopls", { capabilities = capabilities })
 vim.lsp.config("cssls", { capabilities = capabilities })
 vim.lsp.config("templ", { capabilities = capabilities })
-vim.lsp.config("html", { capabilities = capabilities })
 
 vim.lsp.config("clangd", {
     capabilities = capabilities,
-    cmd = { 'clangd', '--background-index', '--clang-tidy', '--log=verbose' },
-    init_options = {
-        fallbackFlags = { '-std=c++17' },
-    }
+    cmd = { 'clangd', '--background-index', '--clang-tidy', '--log=verbose', '--enable-config' },
 })
 
-vim.lsp.enable({ "lua_ls", "pyright", "gopls", "emmet_language_server", "cssls", "ts_ls", "templ", "html", "tinymist",
-    "clangd" })
+vim.lsp.enable({ "lua_ls", "pyright", "gopls", "emmet_language_server", "cssls", "ts_ls", "templ", "tinymist", "clangd" })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
 
 -- format on save

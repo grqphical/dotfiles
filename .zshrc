@@ -76,6 +76,7 @@ export PATH=$PATH:/usr/local/go/bin
 export EDITOR="~/.local/bin/nvim-linux-x86_64/bin"
 export GPG_TTY=$(tty)
 export XDG_DATA_HOME=~/.local/share
+export BROWSER="/mnt/c/Program Files/LibreWolf/librewolf.exe"
 
 
 eval "$(oh-my-posh init zsh --config ~/posh-themes/grqphical.toml)"
