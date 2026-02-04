@@ -73,7 +73,11 @@ vim.keymap.set('n', 'ca', vim.lsp.buf.code_action)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
 vim.keymap.set('n', 'dc', vim.lsp.buf.signature_help)
 
-vim.keymap.set('n', '<leader>sc', ':so %<CR>')
+vim.keymap.set('n', '<leader>so', ':so %<CR>')
+
+-- enable spell check
+vim.keymap.set('n', '<leader>sp', ':setlocal spell spelllang=en_ca<CR>')
+vim.keymap.set('n', '<leader>sx', ':setlocal nospell<CR>')
 
 
 -- Golang Specific: Insert if err != nil
@@ -84,7 +88,6 @@ vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>")
 -- ================================================================================
 vim.pack.add({
     { src = "https://github.com/rose-pine/neovim" },
-    { src = "https://github.com/tpope/vim-fugitive" },
     { src = "https://github.com/nvim-lua/plenary.nvim" },
     { src = "https://github.com/nvim-tree/nvim-web-devicons" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
@@ -95,7 +98,6 @@ vim.pack.add({
     { src = "https://github.com/rafamadriz/friendly-snippets" },
     { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
     { src = "https://github.com/iamcco/markdown-preview.nvim" },
-    { src = "https://github.com/chomosuke/typst-preview.nvim" },
     { src = "https://github.com/grqphical/rest.nvim" },
 
 })
@@ -128,7 +130,6 @@ configs.setup({
         "markdown",
         "latex",
         "yaml",
-        "typst"
     },
     sync_install = false,
     highlight = { enable = true, additional_vim_regex_highlighting = false },
@@ -144,13 +145,6 @@ vim.g.mkdp_filetypes = { "markdown" }
 
 vim.keymap.set("n", "<leader>pm", vim.cmd.MarkdownPreview)
 
-require('typst-preview').setup()
-
--- fugitive (Git)
-vim.keymap.set("n", "<leader>gs", function()
-    vim.cmd("vertical G")
-end)
-
 -- telescope
 require("telescope").setup {
     pickers = {
@@ -165,6 +159,8 @@ local telescope = require('telescope.builtin')
 vim.keymap.set('n', '<leader>fd', telescope.find_files)
 vim.keymap.set('n', '<leader>fh', telescope.help_tags)
 vim.keymap.set('n', '<leader>km', telescope.keymaps)
+vim.keymap.set('n', '<leader>gb', telescope.git_branches)
+vim.keymap.set('n', '<leader>gs', telescope.git_status)
 vim.keymap.set('n', '<leader>en', function()
     telescope.find_files {
         cwd = vim.fn.stdpath('config')
@@ -212,18 +208,14 @@ vim.lsp.config("lua_ls", {
     settings = {
         Lua = {
             runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
                 version = "LuaJIT",
             },
             diagnostics = {
-                -- Get the language server to recognize the `vim` global
                 globals = { "vim" },
             },
             workspace = {
-                -- Make the server aware of Neovim runtime files
                 library = vim.api.nvim_get_runtime_file("", true),
             },
-            -- Do not send telemetry data containing a randomized but unique identifier
             telemetry = {
                 enable = false,
             },
