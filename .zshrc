@@ -64,8 +64,7 @@ alias ta="tmux attach-session"
 alias tk="tmux kill-session"
 alias td="create-dev-tmux.sh"
 
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/dev/go
+export GOPATH=~/dev/go/packages
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export PATH=~/scripts:$PATH
 export PATH=~/language-servers/lua/bin:$PATH
@@ -74,6 +73,7 @@ export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.local/bin/nvim-linux-x86_64/bin
 export PATH=$PATH:/usr/local/go/bin
 export EDITOR="~/.local/bin/nvim-linux-x86_64/bin"
+export BROWSER="/mnt/c/Program Files/LibreWolf/librewolf.exe"
 export GPG_TTY=$(tty)
 export XDG_DATA_HOME=~/.local/share
 export BROWSER="/mnt/c/Program Files/LibreWolf/librewolf.exe"

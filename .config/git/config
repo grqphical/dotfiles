@@ -1,7 +1,7 @@
 [user]
     name = "Nathan Jacobson"
     email = "95062977+grqphical@users.noreply.github.com"
-    signingKey = C68CE13364D73256 
+    signingKey = 8CA1C2ED33FCE223
 
 [core]
     compression = 9

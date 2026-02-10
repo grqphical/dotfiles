@@ -79,6 +79,9 @@ vim.keymap.set('n', '<leader>so', ':so %<CR>')
 vim.keymap.set('n', '<leader>sp', ':setlocal spell spelllang=en_ca<CR>')
 vim.keymap.set('n', '<leader>sx', ':setlocal nospell<CR>')
 
+-- update packages
+vim.keymap.set('n', '<leader>pu', vim.pack.update);
+
 
 -- Golang Specific: Insert if err != nil
 vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>")
@@ -99,6 +102,7 @@ vim.pack.add({
     { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
     { src = "https://github.com/iamcco/markdown-preview.nvim" },
     { src = "https://github.com/grqphical/rest.nvim" },
+    { src = "https://github.com/tpope/vim-fugitive" },
 
 })
 
@@ -145,6 +149,11 @@ vim.g.mkdp_filetypes = { "markdown" }
 
 vim.keymap.set("n", "<leader>pm", vim.cmd.MarkdownPreview)
 
+-- fugitive (Git)
+vim.keymap.set("n", "<leader>gs", function()
+    vim.cmd("vertical G")
+end)
+
 -- telescope
 require("telescope").setup {
     pickers = {
@@ -160,7 +169,6 @@ vim.keymap.set('n', '<leader>fd', telescope.find_files)
 vim.keymap.set('n', '<leader>fh', telescope.help_tags)
 vim.keymap.set('n', '<leader>km', telescope.keymaps)
 vim.keymap.set('n', '<leader>gb', telescope.git_branches)
-vim.keymap.set('n', '<leader>gs', telescope.git_status)
 vim.keymap.set('n', '<leader>en', function()
     telescope.find_files {
         cwd = vim.fn.stdpath('config')
@@ -237,6 +245,7 @@ vim.lsp.config("ts_ls", {
     filetypes = {
         "javascript",
         "typescript",
+        "typescriptreact",
         "vue",
     },
     capabilities = capabilities
@@ -285,6 +294,7 @@ vim.lsp.config("templ", { capabilities = capabilities })
 vim.lsp.config("clangd", {
     capabilities = capabilities,
     cmd = { 'clangd', '--background-index', '--clang-tidy', '--log=verbose', '--enable-config' },
+    init_options = {}
 })
 
 vim.lsp.enable({ "lua_ls", "pyright", "gopls", "emmet_language_server", "cssls", "ts_ls", "templ", "tinymist", "clangd" })
