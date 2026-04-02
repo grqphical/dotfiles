@@ -93,16 +93,15 @@ vim.pack.add({
     { src = "https://github.com/rose-pine/neovim" },
     { src = "https://github.com/nvim-lua/plenary.nvim" },
     { src = "https://github.com/nvim-tree/nvim-web-devicons" },
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
     { src = "https://github.com/nvim-telescope/telescope.nvim" },
     { src = "https://github.com/mbbill/undotree" },
     { src = "https://github.com/neovim/nvim-lspconfig" },
-    { src = "https://github.com/saghen/blink.cmp",                         version = vim.version.range("1.*") },
+    { src = "https://github.com/saghen/blink.cmp",                version = vim.version.range("1.*") },
     { src = "https://github.com/rafamadriz/friendly-snippets" },
-    { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
     { src = "https://github.com/iamcco/markdown-preview.nvim" },
     { src = "https://github.com/grqphical/rest.nvim" },
     { src = "https://github.com/tpope/vim-fugitive" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 
 })
 
@@ -117,33 +116,14 @@ vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
 vim.api.nvim_set_hl(0, "BlinkCMPDocBorder", {})
 
 -- treesitter
-local configs = require("nvim-treesitter.configs")
 
-configs.setup({
-    ensure_installed = {
-        "c",
-        "lua",
-        "vim",
-        "vimdoc",
-        "query",
-        "go",
-        "html",
-        "css",
-        "javascript",
-        "python",
-        "markdown",
-        "latex",
-        "yaml",
-    },
-    sync_install = false,
-    highlight = { enable = true, additional_vim_regex_highlighting = false },
-    indent = { enable = true },
-})
+require('nvim-treesitter').setup {
+    install_dir = vim.fn.stdpath('data') .. '/site'
+}
+
+require('nvim-treesitter').install { 'go', 'python', 'c', 'cpp', 'vimdoc', 'lua', 'html', 'css', 'javascript', 'bash', 'gitcommit', 'gitignore', 'json', 'toml', 'yaml' }
 
 -- notetaking stuff
-require("render-markdown").setup({
-    render_modes = true,
-})
 vim.fn["mkdp#util#install"]()
 vim.g.mkdp_filetypes = { "markdown" }
 
@@ -297,7 +277,16 @@ vim.lsp.config("clangd", {
     init_options = {}
 })
 
-vim.lsp.enable({ "lua_ls", "pyright", "gopls", "emmet_language_server", "cssls", "ts_ls", "templ", "tinymist", "clangd" })
+vim.lsp.config("zls", {
+    capabilities = capabilities,
+    cmd = { 'zls' },
+    filetypes = { 'zig', 'zir' },
+    root_markers = { 'zls.json', 'build.zig', '.git' },
+    workspace_required = false,
+})
+
+vim.lsp.enable({ "lua_ls", "pyright", "gopls", "emmet_language_server", "cssls", "ts_ls", "templ", "tinymist", "clangd",
+    "zls" })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
 
 -- format on save
