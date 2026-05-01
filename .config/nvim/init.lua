@@ -1,7 +1,3 @@
--- ================================================================================
--- Settings
--- ================================================================================
-
 vim.opt.nu             = true
 vim.opt.relativenumber = true
 
@@ -32,6 +28,7 @@ vim.o.splitright = true
 
 vim.opt.updatetime = 50
 
+-- To make clipboard on WSL work
 if vim.fn.has('wsl') == 1 then
     vim.g.clipboard = {
         name = 'WslClipboard',
@@ -47,10 +44,6 @@ if vim.fn.has('wsl') == 1 then
     }
 end
 
--- ================================================================================
--- Remaps
--- ================================================================================
-
 vim.g.mapleader = " "
 -- Open NetRW
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
@@ -62,33 +55,9 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 -- Remap CTRL+C to esc
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
-
--- Format file
-vim.keymap.set("n", "<leader>f", function()
-    vim.lsp.buf.format { async = true }
-end)
-
---lsp keybindings
-vim.keymap.set('n', 'ca', vim.lsp.buf.code_action)
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-vim.keymap.set('n', 'dc', vim.lsp.buf.signature_help)
-
-vim.keymap.set('n', '<leader>so', ':so %<CR>')
-
--- enable spell check
 vim.keymap.set('n', '<leader>sp', ':setlocal spell spelllang=en_ca<CR>')
 vim.keymap.set('n', '<leader>sx', ':setlocal nospell<CR>')
 
--- update packages
-vim.keymap.set('n', '<leader>pu', vim.pack.update);
-
-
--- Golang Specific: Insert if err != nil
-vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>")
-
--- ================================================================================
--- Plugins
--- ================================================================================
 vim.pack.add({
     { src = "https://github.com/rose-pine/neovim" },
     { src = "https://github.com/nvim-lua/plenary.nvim" },
@@ -96,16 +65,12 @@ vim.pack.add({
     { src = "https://github.com/nvim-telescope/telescope.nvim" },
     { src = "https://github.com/mbbill/undotree" },
     { src = "https://github.com/neovim/nvim-lspconfig" },
-    { src = "https://github.com/saghen/blink.cmp",                version = vim.version.range("1.*") },
+    { src = "https://github.com/saghen/blink.cmp",             version = vim.version.range("1.*") },
     { src = "https://github.com/rafamadriz/friendly-snippets" },
     { src = "https://github.com/iamcco/markdown-preview.nvim" },
-    { src = "https://github.com/grqphical/rest.nvim" },
     { src = "https://github.com/tpope/vim-fugitive" },
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
-
 })
 
--- colorscheme
 vim.cmd("colorscheme rose-pine")
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -115,15 +80,7 @@ vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 vim.api.nvim_set_hl(0, "TelescopeBorder", { bg = "none" })
 vim.api.nvim_set_hl(0, "BlinkCMPDocBorder", {})
 
--- treesitter
 
-require('nvim-treesitter').setup {
-    install_dir = vim.fn.stdpath('data') .. '/site'
-}
-
-require('nvim-treesitter').install { 'go', 'python', 'c', 'cpp', 'vimdoc', 'lua', 'html', 'css', 'javascript', 'bash', 'gitcommit', 'gitignore', 'json', 'toml', 'yaml' }
-
--- notetaking stuff
 vim.fn["mkdp#util#install"]()
 vim.g.mkdp_filetypes = { "markdown" }
 
@@ -134,7 +91,6 @@ vim.keymap.set("n", "<leader>gs", function()
     vim.cmd("vertical G")
 end)
 
--- telescope
 require("telescope").setup {
     pickers = {
         find_files = {
@@ -155,15 +111,17 @@ vim.keymap.set('n', '<leader>en', function()
     }
 end)
 
+-- treesitter
+vim.treesitter.language.add('python', { path = "/home/nathan/treesitter/tree-sitter-python.wasm" })
+vim.treesitter.language.add('go', { path = "/home/nathan/treesitter/tree-sitter-go.wasm" })
+vim.treesitter.language.add('cpp', { path = "/home/nathan/treesitter/tree-sitter-cpp.wasm" })
+vim.treesitter.language.add('json', { path = "/home/nathan/treesitter/tree-sitter-json.wasm" })
+vim.treesitter.language.add('javascript', { path = "/home/nathan/treesitter/tree-sitter-javascript.wasm" })
+vim.treesitter.language.add('html', { path = "/home/nathan/treesitter/tree-sitter-html.wasm" })
+vim.treesitter.language.add('typescript', { path = "/home/nathan/treesitter/tree-sitter-typescript.wasm" })
+
 -- undotree
 vim.keymap.set('n', "<leader>u", vim.cmd.UndotreeToggle)
-
--- rest.nvim
-require('rest').setup()
-
--- ================================================================================
--- LSP Setup
--- ================================================================================
 
 vim.diagnostic.config({
     virtual_lines = true
@@ -287,9 +245,7 @@ vim.lsp.config("zls", {
 
 vim.lsp.enable({ "lua_ls", "pyright", "gopls", "emmet_language_server", "cssls", "ts_ls", "templ", "tinymist", "clangd",
     "zls" })
-vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
 
--- format on save
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("lsp", { clear = true }),
     callback = function(args)

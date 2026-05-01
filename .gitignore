@@ -4,3 +4,4 @@ test_lsp.lua
 test_*.lua
 log.txt
 .config/tmux/plugins
+.config/git/
