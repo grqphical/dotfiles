@@ -77,18 +77,12 @@ echo "|_  |_| |_  |  _|_|_|_|___|__,|_|"
 echo "|___|     |_|_|  "
 echo
 
-# fnm
-FNM_PATH="/home/grqphical/.local/share/fnm"
-if [ -d "$FNM_PATH" ]; then
-  export PATH="/home/grqphical/.local/share/fnm:$PATH"
-  eval "`fnm env`"
-fi
-
 stty echo
 
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 
 # fnm
+export PATH="/home/nathan/.local/share/fnm:$PATH"
 eval "$(fnm env --use-on-cd --shell zsh)"
 export PATH="$FNM_MULTISHELL_PATH/bin:$PATH"

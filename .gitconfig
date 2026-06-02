@@ -1,3 +1,6 @@
+[core]
+    editor = "nvim"
+
 [user]
     email = nathan@nathanjacobson.ca
     name = Nathan Jacobson
