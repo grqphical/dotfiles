@@ -88,3 +88,7 @@ stty echo
 
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
+
+# fnm
+eval "$(fnm env --use-on-cd --shell zsh)"
+export PATH="$FNM_MULTISHELL_PATH/bin:$PATH"
