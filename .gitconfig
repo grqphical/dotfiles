@@ -1,9 +1,13 @@
 [user]
     email = nathan@nathanjacobson.ca
     name = Nathan Jacobson
+[include]
+    path = ~/.gitconfig.local
+
 [init]
     defaultBranch = "main"
-
+[commit]
+    gpgSign = true
 [status]
     branch = true
     showStash = true

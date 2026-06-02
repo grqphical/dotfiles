@@ -85,3 +85,6 @@ if [ -d "$FNM_PATH" ]; then
 fi
 
 stty echo
+
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null
