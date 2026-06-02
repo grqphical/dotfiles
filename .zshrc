@@ -86,3 +86,6 @@ gpg-connect-agent updatestartuptty /bye >/dev/null
 export PATH="/home/nathan/.local/share/fnm:$PATH"
 eval "$(fnm env --use-on-cd --shell zsh)"
 export PATH="$FNM_MULTISHELL_PATH/bin:$PATH"
+
+export PATH=$PATH:/usr/local/go/bin
+. "$HOME/.cargo/env"
