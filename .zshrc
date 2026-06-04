@@ -66,6 +66,9 @@ alias tk="tmux kill-session"
 export PATH=~/scripts:$PATH
 export PATH=$PATH:~/.local/bin
 
+export GOPATH=~/dev/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
 eval "$(oh-my-posh init zsh --config ~/posh-themes/amro.omp.json )"
 eval "$(fzf --zsh)"
 
